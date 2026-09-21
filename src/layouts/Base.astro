@@ -1,0 +1,71 @@
+---
+interface Props { title: string; description?: string }
+const { title, description = 'Bytestack — software projects by Daniel Andersen.' } = Astro.props;
+const path = Astro.url.pathname;
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23134a6b'/%3E%3Cpath d='M9 21V11h5a3 3 0 010 6H9m0 0h6a2 2 0 010 4H9' stroke='%23f2ead6' stroke-width='2.2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E" />
+</head>
+<body>
+  <header>
+    <a href="/" class="wordmark">bytestack</a>
+    <nav>
+      <a href="/" aria-current={path === '/' ? 'page' : undefined}>Projects</a>
+      <a href="mailto:da@bytestack.dk">Contact</a>
+    </nav>
+  </header>
+  <main><slot /></main>
+  <footer>
+    <span>© {new Date().getFullYear()} Bytestack</span>
+    <a href="mailto:da@bytestack.dk">da@bytestack.dk</a>
+  </footer>
+</body>
+</html>
+
+<style is:global>
+  :root {
+    --bg: #fbfaf7; --surface: #fff; --text: #16181d; --muted: #5d636e;
+    --line: #e3e0d9; --accent: #134a6b; --accent-soft: #eaf1f6;
+    --radius: 14px;
+    --sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Inter, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #101318; --surface: #171b22; --text: #e9eaed; --muted: #9aa1ad;
+      --line: #262c36; --accent: #7cc0e8; --accent-soft: #16242f;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text); font-family: var(--sans);
+    line-height: 1.6; -webkit-font-smoothing: antialiased;
+    display: flex; flex-direction: column; min-height: 100vh;
+  }
+  header, main, footer { width: 100%; max-width: 720px; margin-inline: auto; padding-inline: 16px; }
+  header {
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 16px; padding-block: 22px; flex-wrap: wrap;
+  }
+  .wordmark { font-weight: 650; letter-spacing: -0.02em; font-size: 1.05rem; text-decoration: none; color: var(--text); }
+  nav { display: flex; gap: 18px; }
+  nav a { color: var(--muted); text-decoration: none; font-size: 0.93rem; }
+  nav a:hover, nav a[aria-current="page"] { color: var(--text); }
+  main { flex: 1; padding-block: 24px 64px; }
+  footer {
+    display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+    border-top: 1px solid var(--line); padding-block: 22px;
+    color: var(--muted); font-size: 0.87rem;
+  }
+  footer a { color: var(--muted); }
+  h1 { font-size: clamp(1.9rem, 5vw, 2.5rem); line-height: 1.15; letter-spacing: -0.025em; margin: 0 0 14px; }
+  h2 { font-size: 1.15rem; letter-spacing: -0.01em; margin: 40px 0 14px; }
+  p { margin: 0 0 16px; }
+  a { color: var(--accent); }
+  .lead { font-size: 1.1rem; color: var(--muted); max-width: 52ch; }
+</style>

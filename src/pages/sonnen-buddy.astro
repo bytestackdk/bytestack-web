@@ -1,0 +1,69 @@
+---
+import Base from '../layouts/Base.astro';
+
+// TODO: paste the real App Store link. Until then the button is disabled
+// rather than pointing somewhere wrong.
+const APP_STORE_URL = '';
+
+const PRIVACY_URL = 'https://bytestackdk.github.io/SonnenBuddy/privacy.html';
+
+const features = [
+  ['Live battery status', 'Reads charge level, charge and discharge rates straight from the battery over your local network — no cloud round trip.'],
+  ['Lock screen Live Activities', 'Keep an eye on what the battery is doing without unlocking your phone.'],
+  ['Eight languages', 'English, Danish, German, Swedish, Dutch, French, Italian and Finnish.'],
+];
+---
+<Base
+  title="Sonnen Buddy — Bytestack"
+  description="Sonnen Buddy is an iOS companion app for your Sonnen home battery, reading live status over your local network."
+>
+  <p class="back"><a href="/">← Projects</a></p>
+
+  <h1>Sonnen Buddy</h1>
+  <p class="lead">
+    An iOS companion for your Sonnen home battery. It talks to the battery directly
+    on your local network and shows you what it is doing right now.
+  </p>
+
+  <p class="actions">
+    {APP_STORE_URL
+      ? <a class="btn" href={APP_STORE_URL} target="_blank" rel="noopener">Download on the App Store</a>
+      : <span class="btn disabled">App Store link coming soon</span>}
+  </p>
+
+  <h2>What it does</h2>
+  <dl>
+    {features.map(([term, desc]) => (
+      <div class="feature">
+        <dt>{term}</dt>
+        <dd>{desc}</dd>
+      </div>
+    ))}
+  </dl>
+
+  <h2>Support &amp; privacy</h2>
+  <p>
+    Questions, bugs or feature requests: <a href="mailto:da@bytestack.dk">da@bytestack.dk</a>.
+  </p>
+  <p>
+    The <a href={PRIVACY_URL} target="_blank" rel="noopener">privacy policy</a> is published
+    alongside the app's source.
+  </p>
+</Base>
+
+<style>
+  .back { font-size: 0.9rem; margin-bottom: 20px; }
+  .back a { color: var(--muted); text-decoration: none; }
+  .back a:hover { color: var(--text); }
+  .actions { margin: 24px 0 8px; }
+  .btn {
+    display: inline-block; padding: 11px 20px; border-radius: 10px;
+    background: var(--accent); color: var(--bg); text-decoration: none;
+    font-weight: 550; font-size: 0.95rem;
+  }
+  .btn.disabled { background: var(--accent-soft); color: var(--muted); cursor: default; }
+  dl { margin: 0; }
+  .feature { padding: 16px 0; border-top: 1px solid var(--line); }
+  dt { font-weight: 600; margin-bottom: 4px; }
+  dd { margin: 0; color: var(--muted); font-size: 0.95rem; }
+</style>
