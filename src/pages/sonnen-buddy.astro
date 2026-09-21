@@ -1,9 +1,10 @@
 ---
 import Base from '../layouts/Base.astro';
 
-// TODO: paste the real App Store link. Until then the button is disabled
-// rather than pointing somewhere wrong.
-const APP_STORE_URL = '';
+// Storefront-neutral link: Apple redirects the visitor to their own region's
+// store. A /dk/ URL would pin every visitor to the Danish storefront, which is
+// wrong for an app localised into eight languages.
+const APP_STORE_URL = 'https://apps.apple.com/app/id1627198189';
 
 const PRIVACY_URL = 'https://bytestackdk.github.io/SonnenBuddy/privacy.html';
 
